@@ -1,0 +1,47 @@
+default:
+  # --- Valve selection ---
+  VALVES_TO_CALIBRATE:
+  - 1
+  - 3
+
+  # --- Target delivery range ---
+  TARGET_RANGE_UL:
+  - 1.0
+  - 8.0
+
+  # --- Opening time bounds ---
+  # OPENING_TIME_MIN_S is a hard floor; the protocol never goes below this.
+  # OPENING_TIME_MAX_S is measured first; used as the anchor for linear estimation.
+  # Leave INITIAL_OPENING_TIMES_S empty [] to use the automatic anchor protocol.
+  INITIAL_OPENING_TIMES_S: []
+  OPENING_TIME_MIN_S: 0.010
+  OPENING_TIME_MAX_S: 0.200
+
+  # --- Initial interior points ---
+  # After the two anchor measurements (max + estimated min), this many points are
+  # added evenly between the anchors.  Total initial points = 2 + N_INITIAL_POINTS.
+  N_INITIAL_POINTS: 2
+
+  # --- Timing ---
+  INTER_PULSE_INTERVAL_S: 0.150   # delay between individual drops
+  SETTLE_TIME_S: 2.5              # wait after last drop before reading scale
+
+  # --- Adaptive pulse count ---
+  # n_pulses is chosen so that: n * vol_per_drop >= MIN_SNR * SCALE_NOISE_G * 1000
+  SCALE_NOISE_G: 0.05             # estimated 1-sigma scale noise [g]
+  MIN_SNR: 10                     # target signal-to-noise ratio for weight
+  MIN_PULSES: 50                  # minimum drops regardless of SNR
+  MAX_PULSES: 1000                # safety cap
+
+  # --- Adaptive range expansion ---
+  MAX_ADAPTIVE_ROUNDS: 3          # rounds of adding new opening times after initial grid
+  COVERAGE_N_POINTS_TARGET: 5     # desired number of points within the target range
+
+  # --- Outlier detection and auto-retry ---
+  # Outliers are re-measured with 2× MIN_PULSES; the retry replaces the original.
+  OUTLIER_SIGMA_THRESHOLD: 2.5
+
+  # --- Save options ---
+  force_save_calibration: false
+
+mode: {}

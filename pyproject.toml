@@ -1,0 +1,129 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "msw-tasks-core"
+dynamic = ["version"]
+description = "Murine Shift Work core tasks: liquid/sound calibration and hardware test protocols."
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { file = "LICENSE" }
+authors = [
+    { name = "Lars B. Rollik", email = "lars@rollik.me" },
+]
+requires-python = ">=3.12"
+dependencies = [
+    "murineshiftwork>=2.14.1",
+    "pybpod-api",
+    "numpy",
+    "tqdm",
+    "one-axis-stage",
+    "pyyaml",
+]
+
+[project.optional-dependencies]
+dev = [
+    "commitizen",
+    "pytest",
+    "pytest-cov",
+    "pre-commit",
+    "ruff",
+    "mypy",
+]
+docs = [
+    "mkdocs-material",
+    "mkdocstrings[python]",
+]
+
+# ---------------------------------------------------------------------------
+# Task entry-point registration
+# Bundled tasks are also discoverable via murineshiftwork.tasks namespace scan.
+# ---------------------------------------------------------------------------
+
+[project.entry-points."msw.tasks"]
+_calibration_liquid_dynamic = "murineshiftwork.tasks._calibration_liquid_dynamic._calibration_liquid_dynamic"
+_calibration_liquid_static = "murineshiftwork.tasks._calibration_liquid_static._calibration_liquid_static"
+_calibration_sound_latency = "murineshiftwork.tasks._calibration_sound_latency._calibration_sound_latency"
+_test_bpod_connect = "murineshiftwork.tasks._test_bpod_connect._test_bpod_connect"
+_test_flush_valves = "murineshiftwork.tasks._test_flush_valves._test_flush_valves"
+_test_minimal_task = "murineshiftwork.tasks._test_minimal_task._test_minimal_task"
+_test_pulsepal_connect = "murineshiftwork.tasks._test_pulsepal_connect._test_pulsepal_connect"
+_test_stage_move = "murineshiftwork.tasks._test_stage_move._test_stage_move"
+_test_ttl_barcodes = "murineshiftwork.tasks._test_ttl_barcodes._test_ttl_barcodes"
+_test_ttl_outputs = "murineshiftwork.tasks._test_ttl_outputs._test_ttl_outputs"
+_test_barcode_iti = "murineshiftwork.tasks._test_barcode_iti._test_barcode_iti"
+_test_video = "murineshiftwork.tasks._test_video._test_video"
+
+# ---------------------------------------------------------------------------
+# Build
+# ---------------------------------------------------------------------------
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "0.1.0"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/murineshiftwork/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/murineshiftwork"]
+artifacts = [
+    "src/murineshiftwork/**/*.yaml",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src/murineshiftwork",
+    "/tests",
+    "/README.md",
+    "/LICENSE",
+    "/pyproject.toml",
+    "/VERSION",
+]
+
+# ---------------------------------------------------------------------------
+# Pytest
+# ---------------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src/murineshiftwork --durations=0"
+
+# ---------------------------------------------------------------------------
+# Ruff
+# ---------------------------------------------------------------------------
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "YTT", "SIM", "PTH"]
+ignore = ["E501"]
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+# ---------------------------------------------------------------------------
+# Mypy
+# ---------------------------------------------------------------------------
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+
+# ---------------------------------------------------------------------------
+# Commitizen
+# ---------------------------------------------------------------------------
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version_provider = "commitizen"
+version = "0.1.0"
+tag_format = "v$version"
+update_changelog_on_bump = false
+version_files = ["VERSION"]
