@@ -13,7 +13,7 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "murineshiftwork>=2.14.1",
+    "msw-core>=0.1.0",
     "pybpod-api",
     "numpy",
     "tqdm",
