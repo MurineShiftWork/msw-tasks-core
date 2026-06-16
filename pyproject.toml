@@ -41,18 +41,18 @@ docs = [
 # ---------------------------------------------------------------------------
 
 [project.entry-points."msw.tasks"]
-_calibration_liquid_dynamic = "murineshiftwork.tasks._calibration_liquid_dynamic._calibration_liquid_dynamic"
-_calibration_liquid_static = "murineshiftwork.tasks._calibration_liquid_static._calibration_liquid_static"
-_calibration_sound_latency = "murineshiftwork.tasks._calibration_sound_latency._calibration_sound_latency"
-_test_bpod_connect = "murineshiftwork.tasks._test_bpod_connect._test_bpod_connect"
-_test_flush_valves = "murineshiftwork.tasks._test_flush_valves._test_flush_valves"
-_test_minimal_task = "murineshiftwork.tasks._test_minimal_task._test_minimal_task"
-_test_pulsepal_connect = "murineshiftwork.tasks._test_pulsepal_connect._test_pulsepal_connect"
-_test_stage_move = "murineshiftwork.tasks._test_stage_move._test_stage_move"
-_test_ttl_barcodes = "murineshiftwork.tasks._test_ttl_barcodes._test_ttl_barcodes"
-_test_ttl_outputs = "murineshiftwork.tasks._test_ttl_outputs._test_ttl_outputs"
-_test_barcode_iti = "murineshiftwork.tasks._test_barcode_iti._test_barcode_iti"
-_test_video = "murineshiftwork.tasks._test_video._test_video"
+_calibration_liquid_dynamic = "murineshiftwork.tasks._calibration_liquid_dynamic.task"
+_calibration_liquid_static = "murineshiftwork.tasks._calibration_liquid_static.task"
+_calibration_sound_latency = "murineshiftwork.tasks._calibration_sound_latency.task"
+_test_bpod_connect = "murineshiftwork.tasks._test_bpod_connect.task"
+_test_flush_valves = "murineshiftwork.tasks._test_flush_valves.task"
+_test_minimal_task = "murineshiftwork.tasks._test_minimal_task.task"
+_test_pulsepal_connect = "murineshiftwork.tasks._test_pulsepal_connect.task"
+_test_stage_move = "murineshiftwork.tasks._test_stage_move.task"
+_test_ttl_barcodes = "murineshiftwork.tasks._test_ttl_barcodes.task"
+_test_ttl_outputs = "murineshiftwork.tasks._test_ttl_outputs.task"
+_test_barcode_iti = "murineshiftwork.tasks._test_barcode_iti.task"
+_test_video = "murineshiftwork.tasks._test_video.task"
 
 # ---------------------------------------------------------------------------
 # Build
