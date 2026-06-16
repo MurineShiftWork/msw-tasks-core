@@ -24,11 +24,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies (lint only - murineshiftwork not on PyPI yet)
-        run: uv sync --extra dev --no-install-project
-
       - name: Run pre-commit (ruff + commitizen + gitleaks)
-        run: uv run pre-commit run --all-files --show-diff-on-failure
+        run: uvx pre-commit run --all-files --show-diff-on-failure
 
   ci:
     name: CI
