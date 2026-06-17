@@ -13,10 +13,6 @@ import time
 import warnings
 
 import numpy as np
-from pybpodapi.exceptions.bpod_error import BpodErrorException
-from scipy.optimize import OptimizeWarning, curve_fit
-from tqdm import tqdm
-
 from murineshiftwork.hardware.bpod.valve import (
     _MAX_PULSES_PER_SMA,
     make_sma_for_valve_train,
@@ -29,6 +25,9 @@ from murineshiftwork.logic.calibration import (
 )
 from murineshiftwork.logic.config import update_valve_calibration
 from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
+from pybpodapi.exceptions.bpod_error import BpodErrorException
+from scipy.optimize import OptimizeWarning, curve_fit
+from tqdm import tqdm
 
 # ---------------------------------------------------------------------------
 # Pure helper functions (no hardware dependencies: unit-testable)

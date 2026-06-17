@@ -1,12 +1,11 @@
 import logging
 import time
 
-from pybpodapi.bpod import Bpod
-from pybpodapi.state_machine import StateMachine
-
 from murineshiftwork.logic.calibration import CalibrationDataSound
 from murineshiftwork.logic.sounds import StereoSound
 from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
+from pybpodapi.bpod import Bpod
+from pybpodapi.state_machine import StateMachine
 
 
 class Task(TaskRunner):

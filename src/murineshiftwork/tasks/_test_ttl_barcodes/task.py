@@ -3,8 +3,6 @@ import time
 
 import numpy as np
 from murineshiftwork.io import save_trial_data
-from pybpodapi.state_machine import StateMachine
-
 from murineshiftwork.logic.barcode import (
     BARCODE_FIRST_STATE_NAME,
     BarcodeConfig,
@@ -12,6 +10,7 @@ from murineshiftwork.logic.barcode import (
     inject_barcode_states,
 )
 from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
+from pybpodapi.state_machine import StateMachine
 
 
 class TaskData:

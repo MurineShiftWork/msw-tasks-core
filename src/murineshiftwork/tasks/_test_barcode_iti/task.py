@@ -27,12 +27,8 @@ import logging
 import time
 from pathlib import Path
 
-from murineshiftwork.io import save_trial_data
-from murineshiftwork.namespace import msw_file
-from pybpodapi.protocol import Bpod
-from pybpodapi.state_machine import StateMachine
-
 from murineshiftwork.hardware.bpod.ttl import add_trial_onset_ttl
+from murineshiftwork.io import save_trial_data
 from murineshiftwork.logic.barcode import (
     BARCODE_FIRST_STATE_NAME,
     BarcodeTTL,
@@ -41,6 +37,9 @@ from murineshiftwork.logic.barcode import (
 )
 from murineshiftwork.logic.misc import draw_jittered_trial_time
 from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
+from murineshiftwork.namespace import msw_file
+from pybpodapi.protocol import Bpod
+from pybpodapi.state_machine import StateMachine
 
 _DEFAULTS = {
     "n_max_trials": 20,

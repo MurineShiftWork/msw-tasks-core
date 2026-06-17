@@ -4,13 +4,12 @@ from multiprocessing import Queue
 from pathlib import Path
 
 import numpy as np
+from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
 from pybpodapi.protocol import Bpod
 from pybpodapi.state_machine import StateMachine
 from rpi_camera_ensemble.conductor.conductor import Conductor
 from rpi_camera_ensemble.config.acquisition import EnsembleAcquisitionConfig
 from rpi_camera_ensemble.config.conductor import ConductorConfig
-
-from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
 
 
 class Task(TaskRunner):

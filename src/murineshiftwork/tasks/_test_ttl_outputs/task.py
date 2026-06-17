@@ -1,14 +1,13 @@
 import logging
 import time
 
-from pybpodapi.state_machine import StateMachine
-
 from murineshiftwork.logic.barcode import (
     BarcodeConfig,
     BarcodeTTL,
     inject_barcode_states,
 )
 from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
+from pybpodapi.state_machine import StateMachine
 
 
 class Task(TaskRunner):
