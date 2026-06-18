@@ -1,2 +1,5 @@
+session_type: test_bpod_connect
+version: 1
+
 default:
   testing: false

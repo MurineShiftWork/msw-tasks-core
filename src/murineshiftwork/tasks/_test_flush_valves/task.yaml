@@ -1,3 +1,6 @@
+session_type: test_flush_valves
+version: 1
+
 default:
   VALVE_OPENING_TIME_MS: 50.0
   VALVE_NUMBERS:

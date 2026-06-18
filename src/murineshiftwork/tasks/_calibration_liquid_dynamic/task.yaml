@@ -1,3 +1,6 @@
+session_type: calibration_liquid_dynamic
+version: 1
+
 default:
   # --- Valve selection ---
   VALVES_TO_CALIBRATE:

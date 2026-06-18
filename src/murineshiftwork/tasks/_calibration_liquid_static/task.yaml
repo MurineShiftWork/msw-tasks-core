@@ -1,3 +1,6 @@
+session_type: calibration_liquid_static
+version: 1
+
 default:
   # Valves to calibrate (Bpod port numbers)
   VALVES_TO_CALIBRATE:
