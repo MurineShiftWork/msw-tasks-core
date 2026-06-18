@@ -1,3 +1,6 @@
+session_type: test_pulsepal_connect
+version: 1
+
 default:
   required_devices:
     - pulsepal

@@ -1,3 +1,6 @@
+session_type: test_barcode_iti
+version: 1
+
 default:
   n_max_trials: 30
   ttl_identifier_sequence: sssLss
