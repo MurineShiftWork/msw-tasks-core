@@ -13,11 +13,11 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "msw-core>=0.1.0",
+    "msw-core>=0.3.0",
     "pybpod-api",
     "numpy",
     "tqdm",
-    "one-axis-stage",
+    "one-axis-stage>=0.2.0",
     "pyyaml",
 ]
 
