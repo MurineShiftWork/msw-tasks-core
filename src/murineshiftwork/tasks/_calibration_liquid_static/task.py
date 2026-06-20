@@ -6,7 +6,7 @@ import numpy as np
 from murineshiftwork.hardware.bpod.valve import make_sma_for_drop_of_water
 from murineshiftwork.hardware.scale import make_scale
 from murineshiftwork.logic.calibration import (
-    CalibrationDataWater,
+    CalibrationDataLiquid,
     flag_outlier_points,
 )
 from murineshiftwork.logic.config import update_valve_calibration
@@ -76,7 +76,7 @@ class Task(TaskRunner):
 
         from murineshiftwork.cli.defaults import DEFAULT_CALIBRATION_FILE_LIQUID
 
-        calibration = CalibrationDataWater(
+        calibration = CalibrationDataLiquid(
             file_path=self.input_kwargs.get(
                 "calibration_file_liquid", DEFAULT_CALIBRATION_FILE_LIQUID
             )

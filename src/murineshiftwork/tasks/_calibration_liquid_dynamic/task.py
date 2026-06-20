@@ -19,7 +19,7 @@ from murineshiftwork.hardware.bpod.valve import (
 )
 from murineshiftwork.hardware.scale import make_scale
 from murineshiftwork.logic.calibration import (
-    CalibrationDataWater,
+    CalibrationDataLiquid,
     _exponential_function,
     flag_outlier_points,
 )
@@ -251,7 +251,7 @@ class Task(TaskRunner):
         scale.start()
         self._tare_verified(scale, max_retries=2, threshold_g=1.0)
 
-        calibration = CalibrationDataWater(
+        calibration = CalibrationDataLiquid(
             file_path=self.input_kwargs.get("calibration_file_liquid") or None
         )
 
