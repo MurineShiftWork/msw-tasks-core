@@ -326,7 +326,7 @@ class Task(TaskRunner):
         except ValueError as exc:
             logging.warning(f"Valve {valve_id}: cannot build ValveCalibration: {exc}")
             return
-        is_valid, reason = new_cal.validate()
+        is_valid, reason = new_cal.check_quality()
         logging.info(
             f"Valve {valve_id}: validation {'PASS' if is_valid else 'FAIL'}: {reason}"
         )
