@@ -436,8 +436,8 @@ class Task(TaskRunner):
                     break
                 new_t = round(t_est + (t_max - t_est) * 0.5, 4)
                 logging.warning(
-                    f"Valve {valve_id}: {t_est:.4f}s → {ul_est:.3f} µL/drop "
-                    f"< {min_ul} µL: stepping up to {new_t:.4f}s"
+                    f"Valve {valve_id}: {t_est:.4f}s -> {ul_est:.3f} uL/drop "
+                    f"< {min_ul} uL: stepping up to {new_t:.4f}s"
                 )
                 t_est = new_t
 
