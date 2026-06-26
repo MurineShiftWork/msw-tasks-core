@@ -45,6 +45,7 @@ _calibration_liquid_dynamic = "murineshiftwork.tasks._calibration_liquid_dynamic
 _calibration_liquid_static = "murineshiftwork.tasks._calibration_liquid_static.task"
 _calibration_sound_latency = "murineshiftwork.tasks._calibration_sound_latency.task"
 _test_bpod_connect = "murineshiftwork.tasks._test_bpod_connect.task"
+_test_bpod_wiring = "murineshiftwork.tasks._test_bpod_wiring.task"
 _test_flush_valves = "murineshiftwork.tasks._test_flush_valves.task"
 _test_minimal_task = "murineshiftwork.tasks._test_minimal_task.task"
 _test_pulsepal_connect = "murineshiftwork.tasks._test_pulsepal_connect.task"
