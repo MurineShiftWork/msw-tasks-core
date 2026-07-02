@@ -6,4 +6,5 @@ build/
 .eggs/
 .venv/
 *.so
+uv.lock
 src/murineshiftwork/_version.py
