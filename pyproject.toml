@@ -18,6 +18,7 @@ dependencies = [
     "numpy",
     "tqdm",
     "one-axis-stage>=0.2.2",
+    "sshkeyboard",
     "pyyaml",
 ]
 
