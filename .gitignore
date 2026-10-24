@@ -8,3 +8,4 @@ build/
 *.so
 uv.lock
 src/murineshiftwork/_version.py
+src/murineshiftwork/_version_*.py
