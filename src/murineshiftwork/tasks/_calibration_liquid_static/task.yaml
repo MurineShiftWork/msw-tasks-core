@@ -2,6 +2,9 @@ session_type: calibration_liquid_static
 version: 1
 
 default:
+  required_devices:   # the framework opens these; scale comes from the setup
+  - bpod
+  - scale
   # Valves to calibrate (Bpod port numbers)
   VALVES_TO_CALIBRATE:
   - 1

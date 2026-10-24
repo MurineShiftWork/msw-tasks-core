@@ -17,7 +17,6 @@ from murineshiftwork.hardware.bpod.valve import (
     _MAX_PULSES_PER_SMA,
     make_sma_for_valve_train,
 )
-from murineshiftwork.hardware.scale import make_scale
 from murineshiftwork.logic.calibration import (
     CalibrationDataLiquid,
     _exponential_function,
@@ -242,13 +241,14 @@ class Task(TaskRunner):
             f"{'=' * 60}"
         )
 
-        scale = self.input_kwargs.get("scale") or make_scale(
-            serial_port=self.input_kwargs.get("serial_port_scale", ""),
-            scale_type=self.input_kwargs.get("scale_type", "hx711"),
-            baudrate=self.input_kwargs.get("scale_baudrate"),
-            protocol=self.input_kwargs.get("scale_protocol"),
-        )
-        scale.start()
+        # The framework opens and starts the scale (setup device `scale`, selected via
+        # required_devices in task.yaml) and closes it after the run; the task only uses it.
+        scale = (self.input_kwargs.get("devices") or {}).get("scale")
+        if scale is None:
+            raise RuntimeError(
+                "No scale in the device collection: the setup must declare a 'scale' device "
+                "(required_devices: [bpod, scale])."
+            )
         self._tare_verified(scale, max_retries=2, threshold_g=1.0)
 
         calibration = CalibrationDataLiquid(
