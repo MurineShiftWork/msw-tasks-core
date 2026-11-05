@@ -3,6 +3,7 @@ import time
 
 from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
 from pybpodapi.bpod import Bpod
+from pybpodapi.exceptions.bpod_error import BpodErrorException
 from pybpodapi.state_machine import StateMachine
 
 
@@ -38,16 +39,35 @@ class Task(TaskRunner):
                 for valve in valve_numbers:
                     if not self.continue_task:
                         break
-                    self._flush_valves([valve], per_valve_time_ms)
+                    if not self._flush_or_stop(
+                        [valve], per_valve_time_ms, cycle, n_flush_cycles
+                    ):
+                        return
                 logging.info(
                     f"Flush cycle {cycle + 1}/{n_flush_cycles} done (sequential: {valve_numbers})"
                 )
             else:
-                self._flush_valves(valve_numbers, valve_opening_time_ms)
+                if not self._flush_or_stop(
+                    valve_numbers, valve_opening_time_ms, cycle, n_flush_cycles
+                ):
+                    return
                 logging.info(f"Flush cycle {cycle + 1}/{n_flush_cycles} done")
 
             if cycle < n_flush_cycles - 1:
                 time.sleep(inter_flush_interval_s)
+
+    def _flush_or_stop(self, valves, valve_opening_time_ms, cycle, n_cycles) -> bool:
+        """Flush ``valves``; on a Bpod communication error, log it and stop the task cleanly."""
+        try:
+            self._flush_valves(valves, valve_opening_time_ms)
+        except BpodErrorException as e:
+            logging.error(
+                f"Flush stopped at cycle {cycle + 1}/{n_cycles}, valves {valves}: "
+                f"{e.args[0] if e.args else e}. Check the Bpod USB connection and power."
+            )
+            self.stop()
+            return False
+        return True
 
     def _flush_valves(self, valves, valve_opening_time_ms):
         output_actions = [(Bpod.OutputChannels.Valve, v) for v in valves]
