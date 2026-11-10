@@ -145,6 +145,20 @@ class Task(TaskRunner):
         config_dir = self.input_kwargs.get("config_dir", "")
         setup_name = self.input_kwargs.get("setup", "")
 
+        # This task drives the real stage through its own connection, so it has nothing to do in
+        # a simulated run; opening the port here would move the rig's stage.
+        if self.input_kwargs.get("simulate"):
+            logging.warning(
+                "simulate: stage_move drives the real stage, so it does not run"
+            )
+            return
+        try:
+            from murineshiftwork.hardware.simulate_guard import refuse_real_hardware
+        except ImportError:  # msw-core < 0.34.6
+            pass
+        else:
+            refuse_real_hardware("stage", serial_port_stage)
+
         if not config or not config.get("axes"):
             logging.error(
                 "No stage config with axes: configure a stage device with axes in setup YAML"
