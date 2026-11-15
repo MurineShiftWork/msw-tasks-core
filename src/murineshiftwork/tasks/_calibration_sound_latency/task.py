@@ -30,8 +30,13 @@ class Task(TaskRunner):
             frequency=5000, duration=0.01, amplitude=0.5, play_blocking=False
         )
 
+        from murineshiftwork.cli.defaults import DEFAULT_CALIBRATION_FILE_SOUND
+
+        # msw-core does not resolve calibration file paths for _calibration* tasks.
         calibration_sound = CalibrationDataSound(
-            file_path=self.input_kwargs["calibration_file_sound"]
+            file_path=self.input_kwargs.get(
+                "calibration_file_sound", DEFAULT_CALIBRATION_FILE_SOUND
+            )
         )
 
         self.bpod.softcode_handler_function = self.sound.execute_sound_handler
