@@ -29,7 +29,7 @@ class Task(TaskRunner):
             ("serial port", str(handle.serial_port)),
             ("firmware version", str(handle.firmware_version)),
             ("model", _MODEL_NAMES.get(handle.model, f"unknown ({handle.model})")),
-            ("dac bit max", str(handle.dac_bitMax)),
+            ("DAC max", str(getattr(handle, "dac_max", None))),
             ("cycle frequency", str(handle.cycle_frequency)),
             ("output channels", str(handle.nr_output_channels)),
             ("trigger channels", str(handle.nr_trigger_channels)),
