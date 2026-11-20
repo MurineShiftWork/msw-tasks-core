@@ -25,10 +25,8 @@ Alignment (per trial):
 
 import logging
 import time
-from pathlib import Path
 
 from murineshiftwork.hardware.bpod.ttl import add_trial_onset_ttl
-from murineshiftwork.io import save_trial_data
 from murineshiftwork.logic.barcode import (
     BARCODE_FIRST_STATE_NAME,
     BarcodeTTL,
@@ -37,7 +35,6 @@ from murineshiftwork.logic.barcode import (
 )
 from murineshiftwork.logic.misc import draw_jittered_trial_time
 from murineshiftwork.logic.task_process import TaskProcess, TaskRunner
-from murineshiftwork.namespace import msw_file
 from pybpodapi.protocol import Bpod
 from pybpodapi.state_machine import StateMachine
 
@@ -62,9 +59,6 @@ class Task(TaskRunner):
         barcode_duration_s = barcode_cfg.total_duration_ms / 1000.0
 
         bnc = eval(f"Bpod.OutputChannels.BNC{s['HARDWARE_BNC_CHANNEL']}")
-
-        save_path = Path(self.bpod.workspace_path) / self.bpod.session_name
-        trial_data_list = []
 
         logging.info(
             f"Barcode config: {barcode_cfg} | "
@@ -145,9 +139,7 @@ class Task(TaskRunner):
                 "barcode_duration_s": round(barcode_duration_s, 4),
                 "barcode_config": barcode_cfg.model_dump(),
             }
-            trial_data_list.append(trial_data)
-
-            save_trial_data(trial_data_list, msw_file(save_path, "df.jsonl"))
+            self.emit_trial(trial_data)  # the framework writes df.jsonl
 
             trial_index += 1
 
