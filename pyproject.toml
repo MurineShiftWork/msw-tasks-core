@@ -16,7 +16,7 @@ authors = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "msw-core>=0.36.2",
+    "msw-core>=0.38.2",
     "pybpod-api",
     "numpy",
     "tqdm",
