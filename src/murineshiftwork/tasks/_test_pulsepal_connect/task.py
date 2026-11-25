@@ -25,14 +25,20 @@ class Task(TaskRunner):
                 "PulsePal handle not injected: check setup config has pulsepal device."
             )
 
+        # The simulated PulsePal carries only the attributes tasks need to run, so every
+        # field is read with a placeholder instead of failing the diagnostic.
+        def read(name, default="n/a"):
+            return getattr(handle, name, default)
+
+        model = read("model", None)
         pairs = [
-            ("serial port", str(handle.serial_port)),
-            ("firmware version", str(handle.firmware_version)),
-            ("model", _MODEL_NAMES.get(handle.model, f"unknown ({handle.model})")),
-            ("DAC max", str(getattr(handle, "dac_max", None))),
-            ("cycle frequency", str(handle.cycle_frequency)),
-            ("output channels", str(handle.nr_output_channels)),
-            ("trigger channels", str(handle.nr_trigger_channels)),
+            ("serial port", str(read("serial_port"))),
+            ("firmware version", str(read("firmware_version"))),
+            ("model", _MODEL_NAMES.get(model, f"unknown ({model})")),
+            ("DAC max", str(read("dac_max", None))),
+            ("cycle frequency", str(read("cycle_frequency"))),
+            ("output channels", str(read("nr_output_channels"))),
+            ("trigger channels", str(read("nr_trigger_channels"))),
         ]
         print()
         _info_box(pairs)
