@@ -20,12 +20,14 @@ def _info_box(pairs: list[tuple[str, str]]) -> None:
 class Task(TaskRunner):
     def run(self):
         bpod = self.bpod
-        hw = bpod._hardware
+        # pybpodapi keeps the hardware description private; the simulated Bpod exposes it
+        # as a public attribute.
+        hw = getattr(bpod, "_hardware", None) or bpod.hardware
         mt = getattr(hw, "machine_type", None)
         fw = getattr(hw, "firmware_version", "?")
 
         pairs = [
-            ("serial port", str(bpod.serial_port)),
+            ("serial port", str(getattr(bpod, "serial_port", "simulated"))),
             ("port config", str(getattr(bpod, "_port_config", "?"))),
             ("firmware version", str(fw)),
             ("machine type", _MACHINE_NAMES.get(mt, f"unknown ({mt})")),
